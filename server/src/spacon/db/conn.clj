@@ -23,6 +23,7 @@
     :password    (:password db-creds)}))
 
 (defn loadconfig []
+  (println "db-creds are " db-creds)
   {:datastore  (jdbc/sql-database db-spec)
    :migrations (jdbc/load-resources "migrations")})
 

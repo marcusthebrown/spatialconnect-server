@@ -21,7 +21,7 @@ WITH (
    OIDS=FALSE
 );
 
-ALTER TABLE public.organizations OWNER TO spacon;
+--ALTER TABLE public.organizations OWNER TO spacon;
 
 CREATE TRIGGER update_updated_at_organizations
     BEFORE UPDATE ON organizations FOR EACH ROW EXECUTE
@@ -44,7 +44,7 @@ WITH (
     OIDS=FALSE
 );
 
-ALTER TABLE public.teams OWNER TO spacon;
+--ALTER TABLE public.teams OWNER TO spacon;
 
 CREATE TRIGGER update_updated_at_teams
     BEFORE UPDATE ON teams FOR EACH ROW EXECUTE
@@ -69,8 +69,7 @@ CREATE TABLE IF NOT EXISTS public.stores
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.stores
-  OWNER TO spacon;
+--ALTER TABLE public.stores OWNER TO spacon;
 
 CREATE TRIGGER update_updated_at_stores
     BEFORE UPDATE ON stores FOR EACH ROW EXECUTE
@@ -94,8 +93,7 @@ CREATE TABLE IF NOT EXISTS public.forms
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.forms
-  OWNER TO spacon;
+--ALTER TABLE public.forms OWNER TO spacon;
 
 CREATE TRIGGER update_updated_at_forms
   BEFORE UPDATE ON forms FOR EACH ROW EXECUTE
@@ -114,8 +112,7 @@ CREATE TABLE IF NOT EXISTS public.devices
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.devices
-  OWNER TO spacon;
+--ALTER TABLE public.devices OWNER TO spacon;
 
 CREATE TRIGGER update_updated_at_devices
   BEFORE UPDATE ON devices FOR EACH ROW EXECUTE
@@ -136,8 +133,7 @@ CREATE TABLE IF NOT EXISTS public.device_locations
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.device_locations
-  OWNER TO spacon;
+--ALTER TABLE public.device_locations OWNER TO spacon;
 
 CREATE TRIGGER update_updated_at_device_locations
   BEFORE UPDATE ON device_locations FOR EACH ROW EXECUTE
@@ -164,8 +160,7 @@ CREATE TABLE IF NOT EXISTS public.form_fields
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.form_fields
-  OWNER TO spacon;
+--ALTER TABLE public.form_fields OWNER TO spacon;
 
 CREATE TRIGGER update_updated_at_form_fields
   BEFORE UPDATE ON form_fields FOR EACH ROW EXECUTE
@@ -190,8 +185,7 @@ CREATE TABLE IF NOT EXISTS public.form_data
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.form_data
-  OWNER TO spacon;
+--ALTER TABLE public.form_data OWNER TO spacon;
 
 CREATE TRIGGER update_updated_at_form_data
     BEFORE UPDATE ON form_data FOR EACH ROW EXECUTE
@@ -255,7 +249,7 @@ WITH (
   OIDS=FALSE
 );
 
-ALTER TABLE public.users OWNER TO spacon;
+--ALTER TABLE public.users OWNER TO spacon;
 
 CREATE TRIGGER update_updated_at_triggers
     BEFORE UPDATE ON triggers FOR EACH ROW EXECUTE

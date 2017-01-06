@@ -14,8 +14,7 @@ CREATE TABLE IF NOT EXISTS public.notifications
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.notifications
-  OWNER TO spacon;
+--ALTER TABLE public.notifications OWNER TO spacon;
 
 CREATE TRIGGER update_updated_at_notifications
     BEFORE UPDATE ON notifications FOR EACH ROW EXECUTE

@@ -34,8 +34,9 @@ services:
       - '5432:5432'
 
   spatialconnect-server:
-    build: .
-    command: 'java -jar /opt/server/target/spacon-server.jar'
+    #build: .
+    #command: 'java -jar /opt/server/target/spacon-server.jar'
+    image: boundlessgeo/spatialconnect-server:devio
     depends_on:
       - mosquitto
       - postgis

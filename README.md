@@ -102,3 +102,36 @@ required even though it is not used.
 ```
 mosquitto_pub -h <container hostname or ip> -p 8883 -t "test" -m "sample pub"  -u "valid jwt" -P "anypass" --cafile path/to/ca.crt --insecure -d
 ```
+
+
+### deploying to cloud foundry
+
+You can deploy Docker continers to Cloud Foundry using:
+
+```
+# use this to deploy mosquitto
+cf push mosquitto -o boundlessgeo/mosquitto:devio
+
+# use this to deploy spatialconnect-server
+cf push spatialconnect-server -o boundlessgeo/spatialconnect-server:devio
+```
+
+Then you will need to bind services and set environment variables before
+the service can run.  You can use the Pivotal Apps Manager web interface
+or use the `cf` command line tool like this:
+
+```
+cf set-env spatialconnect-server MQTT_BROKER_URL=ssl://the.broker.hostname:8884
+cf bind-service spatialconnect-server db-service-instance-name
+```
+
+> You may also need to give the server more memory with `cf scale
+> spatialconnect-server -m 2G`
+
+Once the server is setup, you'll need to run the migration which can be
+done by running a command on the container:
+
+```
+cf push spatialconnect-server -c "lein migrate"
+```
+

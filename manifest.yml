@@ -1,8 +1,5 @@
 ---
 applications:
-  - name: efc
-    buildpack: https://github.com/cloudfoundry/java-buildpack
-    path: server/target/spacon-server.jar
   - name: efc-web
     buildpack: https://github.com/cloudfoundry-community/staticfile-buildpack.git
     path: web/dist
