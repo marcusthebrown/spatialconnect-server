@@ -1,0 +1,9 @@
+We want to push code, then have the entire app deploy...
+so we need to build the static assets into the container somehow
+....but how do you do that with docker hub's automated builds??
+We could create a Dockerfile per environment, and build the static assets data volume container (or a custom nginx container)
+***seems easier to use the nginx container than dvc b/c that's one less container dependency
+
+
+write issue to redeploy the web (static assets) contaner when server container is built
+
