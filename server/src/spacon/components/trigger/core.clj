@@ -194,13 +194,14 @@
   (async/go (while true
               (let [v (async/<! input-channel)
                     pt (:value v)]  ;; todo: support data types other than points
+                (log/debug "received value " v)
                 (do (process-value (:store v) pt notify))))))
 
 (defn test-value
   "Posts a value to be checked on the source channel"
   [triggercomp store value]
   ;; the source-channel is the source of incoming data
-    ;; the store it came from
+  ;; the store it came from
   ;; the value to be checked
   (async/go (async/>! (:source-channel triggercomp)
                       {:store store :value value})))
