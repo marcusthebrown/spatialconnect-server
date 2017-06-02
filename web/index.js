@@ -30,13 +30,16 @@ const rootReducer = combineReducers({
   routing: routerReducer,
 });
 
+const middlewares = [];
+middlewares.push(routerMiddleware(browserHistory));
+middlewares.push(thunk);
+// logger must be the last in the chain of middlewares
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'local') {
+  middlewares.push(logger);
+}
 // create the redux store that holds the state for this app
 // http://redux.js.org/docs/api/createStore.html
-const middleware = routerMiddleware(browserHistory);
-const store = createStore(
-  rootReducer,
-  applyMiddleware(middleware, thunk, logger) // logger must be the last in the chain
-);
+const store = createStore(rootReducer, applyMiddleware(middlewares));
 
 const persistedUser = loadState();
 const token = persistedUser ? persistedUser.token : null;
