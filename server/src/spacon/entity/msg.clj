@@ -19,7 +19,7 @@
             [clojure.tools.logging :as log])
   (:import (com.boundlessgeo.schema MessagePbf$Msg)))
 
-(defn- bytes->map [proto]
+(defn bytes->map [proto]
   (let [msg (MessagePbf$Msg/parseFrom proto)
         p (.getPayload msg)
         payload (if (blank? p) {} (keywordize-keys (json/read-str p)))]

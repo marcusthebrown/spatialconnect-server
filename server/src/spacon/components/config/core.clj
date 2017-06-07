@@ -21,7 +21,8 @@
             [spacon.components.form.db :as formmodel]
             [clojure.tools.logging :as log]
             [spacon.specs.msg]
-            [clojure.spec :as s]))
+            [clojure.spec :as s]
+            [spacon.entity.msg :as msg]))
 
 (defn create-config
   "Returns a map of the config by fetching the stores and forms
@@ -42,12 +43,13 @@
    on its reply-to topic"
   [config-comp queue-comp msg]
   (if (s/valid? :spacon.specs.msg/msg msg)
-    (do (log/debug "Received request for config" msg)
+    (do
+      (log/debug "Received request for config" msg)
       (let [user  (token->user (:jwt msg))
             cfg   (create-config config-comp user)]
         (log/debug "Sending config to" user)
         (queueapi/publish queue-comp (assoc msg :payload cfg))))
-    (log/errorf "config message was invalid b/c %s" (s/explain :spacon.specs.msg/msg msg))))
+    (log/errorf "config message was invalid b/c: %s" (s/explain :spacon.specs.msg/msg msg))))
 
 (defn- queue->register
   "Queue message handler that registers a device"

@@ -8,7 +8,6 @@
 (s/def ::payload (s/or :empty empty? :not-empty map?))
 (s/def ::action string?)
 
-(s/def ::msg (s/keys :req-un [::to ::correlationId ::jwt
-                                          ::context ::action]
-                                 :opt-un [::payload]))
+(s/def ::msg (s/keys :req-un [::to ::correlationId ::jwt ::context ::action]
+                     :opt-un [::payload]))
 

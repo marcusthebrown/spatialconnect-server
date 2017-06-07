@@ -26,7 +26,7 @@
            (java.net InetAddress)))
 
 (def client-id (or (System/getenv "MQTT_CLIENT_ID")
-                   (subs (str "sc-" (InetAddress/getLocalHost)) 0 22 )))
+                   (subs (str "sc-" (InetAddress/getLocalHost)) 0 22)))
 (defonce conn (atom nil))
 (def action-topic {:register-device "/config/register"
                      :full-config "/config"
@@ -76,12 +76,13 @@
 
 ; receive message on subscribe channel
 (defn- receive [mqtt topic message]
-  (log/tracef "Received message on topic: %nmessage: %s" topic (msg/from-bytes message))
+  (log/debugf "Received message on topic: %s message: %s" topic (msg/from-bytes message))
+  (prn (msg/from-bytes message))
   (if (nil? message)
     (log/debug "Nil message on topic " topic)
     (async/go (async/>!! (:subscribe-channel mqtt) {:topic topic :message (msg/from-bytes message)}))))
 
-(defn reconnect [mqtt-comp reason ]
+(defn reconnect [mqtt-comp reason]
   (let [url (or (System/getenv "MQTT_BROKER_URL") "tcp://localhost:1883")]
     (log/debugf "Connection lost (%s). Attempting reconnect to %s" reason url)
     (connectmqtt url)
@@ -89,7 +90,7 @@
                   (mh/subscribe @conn {(subs (str t) 1) 2}
                                 (fn [^String topic _ ^bytes payload]
                                   (receive mqtt-comp topic payload))
-                                {:on-connection-lost (partial reconnect mqtt-comp) }))
+                                {:on-connection-lost (partial reconnect mqtt-comp)}))
                 (keys @topics)))))
 
 (defn subscribe
@@ -100,7 +101,7 @@
   (mh/subscribe @conn {topic 2}
                 (fn [^String topic _ ^bytes payload]
                   (receive mqtt topic payload))
-                {:on-connection-lost (partial reconnect mqtt) }))
+                {:on-connection-lost (partial reconnect mqtt)}))
 
 (defn unsubscribe
   "Unsubscribe to mqtt topic"
@@ -132,7 +133,7 @@
                     t (:topic v)
                     m (:message v)
                     f ((keyword t) @topics)]
-
+                (log/debugf "topic: %s message: %s" t m)
                 (if-not (or (nil? m) (nil? f))
                   (f m)
                   (log/debug "Nil value on Subscribe Channel"))))))
