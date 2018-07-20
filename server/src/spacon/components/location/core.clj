@@ -15,7 +15,7 @@
 (ns spacon.components.location.core
   (:require [com.stuartsierra.component :as component]
             [clojure.data.json :as json]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [yesql.core :refer [defqueries]]
             [spacon.components.queue.protocol :as queueapi]
             [spacon.components.location.db :as locationmodel]

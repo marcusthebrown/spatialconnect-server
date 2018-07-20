@@ -1,7 +1,7 @@
 (ns spacon.components.http.user
   (:require [spacon.components.http.intercept :as intercept]
             [clojure.tools.logging :as log]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [spacon.specs.user]
             [spacon.components.user.core :as userapi]
             [spacon.components.http.response :as response]))

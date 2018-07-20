@@ -17,7 +17,7 @@
             [clojure.data.json :as json]
             [yesql.core :refer [defqueries]]
             [spacon.specs.device]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [clojure.tools.logging :as log]))
 
 ;; define sql queries as functions in this namespace

@@ -2,7 +2,7 @@
   (:require [spacon.components.device.core :as deviceapi]
             [clojure.tools.logging :as log]
             [spacon.components.http.response :as response]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [spacon.components.http.intercept :as intercept]))
 
 (defn http-get-all-devices

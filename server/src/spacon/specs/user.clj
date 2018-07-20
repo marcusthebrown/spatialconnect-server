@@ -13,7 +13,7 @@
 ;; limitations under the License.
 
 (ns spacon.specs.user
-  (:require [clojure.spec :as s]))
+  (:require [clojure.spec.alpha :as s]))
 
 ;;; specs about user account data
 (def email-regex #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$")

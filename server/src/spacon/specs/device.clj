@@ -13,7 +13,7 @@
 ;; limitations under the License.
 
 (ns spacon.specs.device
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [clojure.test.check.generators :as gen]))
 
 (def non-empty-string (s/with-gen

@@ -1,5 +1,5 @@
 (ns spacon.specs.msg
-  (:require [clojure.spec :as s]))
+  (:require [clojure.spec.alpha :as s]))
 
 (s/def ::to string?)
 (s/def ::correlationId pos-int?)

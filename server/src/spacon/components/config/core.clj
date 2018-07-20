@@ -21,7 +21,7 @@
             [spacon.components.form.db :as formmodel]
             [clojure.tools.logging :as log]
             [spacon.specs.msg]
-            [clojure.spec :as s]))
+            [clojure.spec.alpha :as s]))
 
 (defn create-config
   "Returns a map of the config by fetching the stores and forms

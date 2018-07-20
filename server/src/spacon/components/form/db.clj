@@ -15,7 +15,7 @@
 (ns spacon.components.form.db
   (:require [spacon.db.conn :as db]
             [yesql.core :refer [defqueries]]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [clojure.java.jdbc :as jdbc]
             [clojure.data.json :as json]
             [spacon.specs.form]

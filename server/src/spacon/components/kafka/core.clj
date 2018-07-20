@@ -20,7 +20,7 @@
             [clojure.tools.logging :as log]
             [spacon.specs.msg]
             [clojure.data.json :as json]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [spacon.components.queue.protocol :as queue])
   (:import [org.apache.kafka.clients.producer ProducerRecord KafkaProducer Callback
             RecordMetadata Producer]

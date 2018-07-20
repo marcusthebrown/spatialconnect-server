@@ -6,7 +6,7 @@
             [spacon.components.queue.protocol :as queueapi]
             [spacon.components.http.auth :refer [check-auth]]
             [spacon.entity.msg :as msg]
-            [clojure.spec :as s])
+            [clojure.spec.alpha :as s])
   (:import (java.net URLDecoder)
            (com.boundlessgeo.schema Actions)))
 

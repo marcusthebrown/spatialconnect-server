@@ -18,7 +18,7 @@
             [yesql.core :refer [defqueries]]
             [spacon.specs.store]
             [clojure.data.json :as json]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [camel-snake-kebab.core :refer :all]
             [camel-snake-kebab.extras :refer [transform-keys]]
             [spacon.entity.store :refer :all]))
