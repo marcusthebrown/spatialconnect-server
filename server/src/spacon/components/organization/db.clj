@@ -13,7 +13,7 @@
 ;; limitations under the License.
 
 (ns spacon.components.organization.db
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [spacon.specs.organization :as specs]
             [spacon.db.conn :as db]
             [clojure.set :refer [rename-keys]]

@@ -3,7 +3,7 @@
             [clj-http.client :as client]
             [spacon.components.http.response :as response]
             [clojure.xml :as xml]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [clojure.tools.logging :as log]
             [spacon.components.store.core :as storeapi]
             [spacon.components.queue.protocol :as queueapi]

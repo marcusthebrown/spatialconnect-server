@@ -13,7 +13,7 @@
 ;; limitations under the License.
 
 (ns spacon.specs.form
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [spacon.components.team.db :as teammodel]
             [clojure.test.check.generators :as gen]
             [com.gfredericks.test.chuck.generators :as genc]))

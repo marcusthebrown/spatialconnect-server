@@ -1,7 +1,7 @@
 (ns spacon.components.http.notification
   (:require [spacon.components.http.response :as response]
             [spacon.components.http.intercept :as intercept]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [spacon.specs.notification]
             [spacon.components.notification.core :as notifapi]))
 

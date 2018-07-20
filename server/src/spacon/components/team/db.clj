@@ -14,7 +14,7 @@
 
 (ns spacon.components.team.db
   (:require [spacon.db.conn :as db]
-            [clojure.spec :as s]
+            [clojure.spec.alpha :as s]
             [spacon.specs.team]
             [clojure.set :refer [rename-keys]]
             [spacon.components.organization.db :as orgsmodel]

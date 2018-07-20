@@ -13,7 +13,7 @@
 ;; limitations under the License.
 
 (ns spacon.specs.organization
-  (:require [clojure.spec :as s]))
+  (:require [clojure.spec.alpha :as s]))
 
 ;;; specs for organization
 (s/def :organization/name string?)
