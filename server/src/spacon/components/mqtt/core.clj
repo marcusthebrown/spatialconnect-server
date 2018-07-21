@@ -27,12 +27,12 @@
 
 (def client-id (or (System/getenv "MQTT_CLIENT_ID") "default-client-id"))
 (defonce conn (atom nil))
-(def action-topic {:register-device "/config/register"
-                   :full-config "/config"
-                   :config-update "/config/update"
-                   :store-form "/store/form"
-                   :ping "/ping"
-                   :device-info "/device/info"
+(def action-topic {:register-device   "/config/register"
+                   :full-config       "/config"
+                   :config-update     "/config/update"
+                   :store-form        "/store/form"
+                   :ping              "/ping"
+                   :device-info       "/device/info"
                    :location-tracking "/store/tracking"})
 
 (def topics
@@ -60,14 +60,15 @@
   (while (or (nil? @conn) (not (mh/connected? @conn)))
     (log/debugf "Connecting MQTT Client to %s" url)
     (try
-      (do
-        (reset! conn (mh/connect url client-id))
-        (log/infof "MQTT Client connected to %s" url))
+      (let [client (mh/connect url client-id)]
+        (log/debugf "MQTT Client connected to %s" url)
+        (reset! conn client))
       (catch MqttException e
         (do
           (log/error e "Failed to connect to" url)
-          ; wait 4 seconds befor trying again
-          (Thread/sleep 4000))))))
+          ; wait 4 seconds before trying again
+          (Thread/sleep 4000)))))
+  @conn)
 
 ; receive message on subscribe channel
 (defn- receive [_ topic message]
@@ -89,19 +90,18 @@
    (log/debugf "Subscribing to topic %s" topic)
    (mh/subscribe @conn {topic 2}
                  (fn [^String topic _ ^bytes payload]
-                   (async/go (receive mqtt-comp topic payload)))
-                 {:on-connection-lost (partial subscribe-mqtt mqtt-comp (:broker-url mqtt-comp))}))
+                   (async/go (receive mqtt-comp topic payload)))))
   ([mqtt-comp]
    (doall (map (fn [topic-key]
                  (let [topic (subs (str topic-key) 1)]
                    (subscribe-mqtt mqtt-comp topic)))
                (keys @topics)))))
 
-(defn subscribe [mqtt-comp topic func]
+(defn- subscribe [mqtt-comp topic func]
   (add-topic topic func)
   (subscribe-mqtt mqtt-comp topic))
 
-(defn unsubscribe
+(defn- unsubscribe
   "Unsubscribe to mqtt topic"
   [_ topic]
   (log/debug "Unsubscribing to topic" topic)
@@ -125,16 +125,16 @@
 
 (defrecord MqttComponent [mqtt-config]
   component/Lifecycle
-  queue/IQueue
   (start [this]
     (log/debug "Starting MQTT Component")
     (let [url (or (:broker-url mqtt-config) "tcp://localhost:1883")
-          m (connectmqtt url)]
-      (assoc this :conn m :broker-url url)))
+          conn (connectmqtt url)]
+      (assoc this :conn conn :broker-url url)))
   (stop [this]
     (log/debug "Stopping MQTT Component")
     (mh/disconnect @conn)
     this)
+  queue/IQueue
   (publish [this msg]
     (let [topic (or (get action-topic (:to msg)) (:to msg))]
       (publish this topic (assoc-in msg [:to] topic))))
