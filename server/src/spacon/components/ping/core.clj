@@ -29,7 +29,7 @@
                                   :timestamp (l/format-local-time (l/local-now) :date-time-no-ms)})]
     (queueapi/publish queue-comp
                       (msg/map->Msg
-                       {:topic "test"
+                       {:to "ping"
                         :value ping-msg
                         :key "anykey"
                         :partition 0}))))

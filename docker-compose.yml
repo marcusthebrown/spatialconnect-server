@@ -28,12 +28,9 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
   mqtt:
-    image: quay.io/boundlessgeo/emq:latest
+    image: jllopis/mosquitto
     ports:
       - '1883:1883'
-      - "18083:18083" # http (web dashboard)
-      # - '8883:8883'
-      # - '8884:8884'
 
   postgis:
     image: mdillon/postgis

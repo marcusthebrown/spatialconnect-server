@@ -27,9 +27,9 @@
   "Send push notifications using FCM"
   [push-message]
   (httpclient/post "https://fcm.googleapis.com/fcm/send"
-             {:body (json/write-str push-message)
-              :headers {"Authorization" (str "key=" (System/getenv "FCM_SERVER_KEY"))}
-              :content-type :json}))
+                   {:body (json/write-str push-message)
+                    :headers {"Authorization" (str "key=" (System/getenv "FCM_SERVER_KEY"))}
+                    :content-type :json}))
 
 (defn- send->device
   "Function used to send spacon notifications or push notificatons to one registered devices"

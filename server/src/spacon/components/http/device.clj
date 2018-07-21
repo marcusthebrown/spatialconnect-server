@@ -30,7 +30,7 @@
     (if (s/valid? :spacon.specs.device/device-spec device)
       (if-let [d (deviceapi/create device-comp device)]
         (response/ok d))
-      (let [reason  (s/explain-str :spacon.specs.device/device-spec device)
+      (let [reason (s/explain-str :spacon.specs.device/device-spec device)
             err-msg (format "Failed to create new device %s because %s" device reason)]
         (log/error err-msg)
         (response/error err-msg)))))
@@ -54,13 +54,15 @@
   (deviceapi/delete device-comp (get-in request [:path-params :id]))
   (response/ok "success"))
 
-(defn routes [device-comp] #{["/api/devices" :get
-                              (conj intercept/common-interceptors (partial http-get-all-devices device-comp)) :route-name :get-devices]
-                             ["/api/devices/:id" :get
-                              (conj intercept/common-interceptors (partial http-get-device device-comp)) :route-name :get-device]
-                             ["/api/devices/:id" :put
-                              (conj intercept/common-interceptors (partial http-put-device device-comp)) :route-name :put-device]
-                             ["/api/devices" :post
-                              (conj intercept/common-interceptors (partial http-post-device device-comp)) :route-name :post-device]
-                             ["/api/devices/:id" :delete
-                              (conj intercept/common-interceptors (partial http-delete-device device-comp)) :route-name :delete-device]})
+(defn routes
+  [device-comp]
+  #{["/api/devices" :get
+     (conj intercept/common-interceptors (partial http-get-all-devices device-comp)) :route-name :get-devices]
+    ["/api/devices/:id" :get
+     (conj intercept/common-interceptors (partial http-get-device device-comp)) :route-name :get-device]
+    ["/api/devices/:id" :put
+     (conj intercept/common-interceptors (partial http-put-device device-comp)) :route-name :put-device]
+    ["/api/devices" :post
+     (conj intercept/common-interceptors (partial http-post-device device-comp)) :route-name :post-device]
+    ["/api/devices/:id" :delete
+     (conj intercept/common-interceptors (partial http-delete-device device-comp)) :route-name :delete-device]})
