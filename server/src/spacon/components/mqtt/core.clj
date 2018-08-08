@@ -125,6 +125,7 @@
 
 (defrecord MqttComponent [mqtt-config]
   component/Lifecycle
+  queue/IQueue
   (start [this]
     (log/debug "Starting MQTT Component")
     (let [url (or (:broker-url mqtt-config) "tcp://localhost:1883")
